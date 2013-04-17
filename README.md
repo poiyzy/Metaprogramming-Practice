@@ -1,4 +1,4 @@
 Metaprogramming-Practice
 ========================
 
-This is the practicing of [metaprogramming](http://ruby-metaprogramming.rubylearning.com) in ruby 's assignments.
+This is the practicing of [metaprogramming in ruby](http://ruby-metaprogramming.rubylearning.com)'s assignments.
