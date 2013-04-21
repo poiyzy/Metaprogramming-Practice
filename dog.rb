@@ -1,6 +1,5 @@
 class Dog
   attr_reader :name
-  attr_accessor :abilities
 
   MSGS = {:dance => 'is dancing', :poo => 'is a smelly doggy!', :laugh => 'finds this hilarious!'}
 
@@ -8,18 +7,20 @@ class Dog
     @name = name
   end
 
-  def can(*abilities)
+  def can(*abilities, &block)
+    meta = class << self; self; end
     abilities.each do |ability|
-      meta = class << self; self; end
       meta.class_eval do
-        define_method ability do
-          "#{self.name} #{MSGS[ability]}"
+        if block_given?
+          send(:define_method, ability, &block)
+        else
+          send(:define_method, ability) { "#{name} #{MSGS[ability]}" }
         end
       end
     end
   end
 
-  def method_missing(name, *args, &block)
+  def method_missing(name)
     "#{self.name} doesn't understand #{name}"
   end
 end

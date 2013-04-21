@@ -2,8 +2,9 @@ require_relative 'dog'
 
 lassie, fido, stimpy = %w[Lassie Fido Stimpy].collect{|name| Dog.new(name)}
 lassie.can :dance, :poo, :laugh
-fido.can :poo
+fido.can(:poo){"#{name} is smelly."}
 stimpy.can :dance
+stimpy.can(:cry){"#{name} cried AHHHH"}
 
 p lassie.dance
 p lassie.poo
@@ -16,3 +17,4 @@ puts
 p stimpy.dance
 p stimpy.poo
 p stimpy.laugh
+p stimpy.cry

@@ -8,6 +8,11 @@ describe Dog do
       dog.can :dance
       dog.dance.should == "Qiqi is dancing"
     end
+
+    it "takes a block" do
+      dog.can(:cry){"#{name} cried AHHHH"}
+      dog.cry.should == "Qiqi cried AHHHH"
+    end
   end
 
   context "Not having abilities" do
