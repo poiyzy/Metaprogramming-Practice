@@ -6,18 +6,20 @@ class Dog
 
   def initialize(name)
     @name = name
-    @abilities = []
   end
 
   def can(*abilities)
-    self.abilities = abilities
+    abilities.each do |ability|
+      meta = class << self; self; end
+      meta.class_eval do
+        define_method ability do
+          "#{self.name} #{MSGS[ability]}"
+        end
+      end
+    end
   end
 
   def method_missing(name, *args, &block)
-    if abilities.include?(name)
-      "#{self.name} #{MSGS[name]}"
-    else
-      "#{self.name} doesn't understand #{name}"
-    end
+    "#{self.name} doesn't understand #{name}"
   end
 end
